@@ -1,0 +1,2 @@
+class PictureGallery < ApplicationRecord
+end

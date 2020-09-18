@@ -1,4 +1,10 @@
 class GalleryController < ApplicationController
   def index
   end
-end
+
+  def show; end
+
+  def create
+    binding.pry
+  end
+end 

@@ -3,7 +3,9 @@ class GalleryController < ApplicationController
     @picture_gallery = PictureGallery.new()
   end
 
-  def show; end
+  def show
+    @picture_gallery = PictureGallery.find(params[:id])
+  end
 
   def create
     @picture_gallery = PictureGallery.new(gallery_params)

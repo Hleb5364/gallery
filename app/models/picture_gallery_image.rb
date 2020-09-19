@@ -1,5 +1,5 @@
 class PictureGalleryImage < ApplicationRecord
-  belongs_to :picture_galleries
+  belongs_to :picture_gallery
 
   has_one_attached :image
 end

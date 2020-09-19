@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root 'gallery#index'
 
   resources :gallery, only: [:create, :show] do
-    post :add_image
+    post :add_image, on: :member
   end
 end

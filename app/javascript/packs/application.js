@@ -11,6 +11,8 @@ require("channels")
 
 
 $(function() {
+  $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html")
+
   $("[data-select-gallery]").change(function() {
     if (this.selectedIndex!==0) {
       window.location.href = this.value

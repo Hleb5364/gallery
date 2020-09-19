@@ -3,19 +3,33 @@
 </h4>
 <div class="row">
   <div class="col-md-3">
-    <%= form_with model: @picture_gallery, url: gallery_index_path do |form| %>
+    <%= form_with model: @picture_gallery, url: gallery_add_image_path(gallery_id: @picture_gallery.id), method: :post do |form| %>
       <div class="custom-file ml-2 mb-2">
         <%= form.file_field :image, class: "custom-file-input", data: {'image-file': true}%>
         <%= form.label :image, "Додати картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
       </div>
 
       <div class="form-group ml-2">
-        <button type="submit" class="btn btn-primary btn-block">Створити </button>
+        <button type="submit" class="btn btn-primary btn-block">Додати</button>
       </div>                                                                      
     <%end%>
   </div>
   
   <div class="col-md-9">
-    
+    <div class="container">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="showall" role="tabpanel" aria-labelledby="showall-tab">
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 1</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 1</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 2</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 1</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 2</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 2</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 3</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 3</div></div>
+          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 3</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -18,6 +18,10 @@ class GalleryController < ApplicationController
     end
   end
 
+  def add_image
+    binding.pry
+  end
+
   private
 
   def gallery_params

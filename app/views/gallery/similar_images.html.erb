@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_pack_tag "picture_checker" %>
+<% end %>
+
 <h4 class="card-title mt-3 text-center">
   Схожі картинки
 </h4>
@@ -23,7 +27,7 @@
   <div class="col-md-9">
     <div class="gallery-image">
       <div class="img-box">
-        <img src="<%= url_for(@pictures.image) %>" alt="" /> 
+        <img src="<%= url_for(@pictures.image) %>" alt="" data-main-image/> 
       </div>
       <% @similar_images.each do |similar_image| %>
         <div class="img-box">

@@ -26,11 +26,11 @@ function updateUploadedImage(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      var fileName = $('[data-image-file]')[0].files[0].name
-
-      if (fileName.length > 20) {
-        fileName = fileName.substring(0, 20) + "...";
-      }
+    var fileName = $('[data-image-file]')[0].files[0].name
+    debugger
+    if (fileName.length > 20) {
+      fileName = fileName.substring(0, 20) + "...";
+    }
 
       $('[data-image-label]').text(fileName)
     }

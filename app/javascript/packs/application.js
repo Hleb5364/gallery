@@ -10,9 +10,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 
-$(function() {
-  $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html")
-
+$(function(){
   $("[data-select-gallery]").change(function() {
     if (this.selectedIndex!==0) {
       window.location.href = this.value

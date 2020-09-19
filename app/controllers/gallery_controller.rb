@@ -22,6 +22,7 @@ class GalleryController < ApplicationController
 
   def similar_images
     @pictures = PictureGalleryImage.find(params[:picture_id])
+    @similar_images = @pictures.similar_images.paginate(page: params[:page], per_page: 5)
   end
 
   def add_image
@@ -36,14 +37,24 @@ class GalleryController < ApplicationController
     end
   end
 
-  def add_similar_images; end
+  def add_similar_images
+    picture = PictureGalleryImage.find_by(picture_gallery_id: params[:id])
+    picture.similar_images.attach(gallery_params[:similar_image])
+
+    if picture.save
+      redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
+    else
+      flash[:alert] = "Щось пішло не так("
+      redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
+    end
+  end
 
   private
 
   def gallery_params
     params.fetch(:picture_gallery, {}).permit(:category,
                                               :image,
-                                              :similar_images)
+                                              :similar_image)
   end
 
   def set_picture_gallery

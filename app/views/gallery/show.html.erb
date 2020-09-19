@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-md-3">
     <%= form_with model: @picture_gallery, url: add_image_gallery_path(id: @picture_gallery.id), method: :post, local: true do |form| %>
-      <div class="custom-file ml-2 mb-2">
+      <div class="custom-file ml-2 mb-2 mt-2">
         <%= form.file_field :image, class: "custom-file-input", data: {'image-file': true}%>
         <%= form.label :image, "Додати картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
       </div>
@@ -20,23 +20,20 @@
   </div>
   
   <div class="col-md-9">
-    <div class="container">
-      <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="showall" role="tabpanel" aria-labelledby="showall-tab">
-          <% @picture_gallery.picture_gallery_images.each do |picture_gallery_image| %>
-            <div class="Portfolio"><a href="#!"><img class="card-img" src="<%= url_for(picture_gallery_image.image) %>" alt=""></a><div class="desc">Car 1</div></div>
-          <% end %>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 1</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 1</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 2</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 1</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 2</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 2</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Car 3</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">City 3</div></div>
-          <div class="Portfolio"><a href="#!"><img class="card-img" src="http://placehold.it/400x400" alt=""></a><div class="desc">Forest 3</div></div>
+    <div class="gallery-image">
+      <% @gallery.each do |picture_gallery_image| %>
+        <div class="img-box">
+          <img src="<%= url_for(picture_gallery_image.image) %>" alt="" />
+          <div class="transparent-box">
+            <div class="caption">
+              <p>Подивитись схожі картинки</p>
+            </div>
+          </div> 
         </div>
-      </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @gallery %>
     </div>
   </div>
 </div>

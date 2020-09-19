@@ -1,10 +1,13 @@
 class GalleryController < ApplicationController
   before_action :set_picture_gallery, only: [:show, :add_image]
+  
   def index
     @picture_gallery = PictureGallery.new()
   end
 
-  def show; end
+  def show
+    @gallery = @picture_gallery.picture_gallery_images.paginate(page: params[:page], per_page: 6)
+  end
 
   def create
     @picture_gallery = PictureGallery.new(gallery_params)
@@ -18,12 +21,10 @@ class GalleryController < ApplicationController
   end
 
   def add_image
-    binding.pry
     picture = PictureGalleryImage.new(picture_gallery_id: @picture_gallery.id)
     picture.image.attach(gallery_params[:image])
-    binding.pry
+
     if picture.save
-      binding.pry
       redirect_to gallery_path(params[:id])
     else
       flash[:alert] = "Щось пішло не так("

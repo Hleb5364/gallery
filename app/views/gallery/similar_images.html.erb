@@ -1,0 +1,30 @@
+<h4 class="card-title mt-3 text-center">
+  Схожі картинки
+</h4>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= form_with model: @picture_gallery, url: add_similar_images_gallery_path(id: @picture_gallery.id), method: :post, local: true do |form| %>
+      <div class="custom-file ml-2 mb-2 mt-2">
+        <%= form.file_field :similar_images, class: "custom-file-input", data: {'image-file': true}%>
+        <%= form.label :similar_images, "Додати схожу картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
+      </div>
+      <div class="ml-2 mb-2">
+        <% flash.each do |key, message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+      <div class="form-group ml-2">
+        <button type="submit" class="btn btn-primary btn-block">Додати</button>
+      </div>                                                                      
+    <%end%>
+  </div>
+  
+  <div class="col-md-9">
+    <div class="gallery-image">
+      <div class="img-box">
+        <img src="<%= url_for(@pictures.image) %>" alt="" /> 
+      </div>
+    </div>
+  </div>
+</div>

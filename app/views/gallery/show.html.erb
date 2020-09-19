@@ -22,14 +22,16 @@
   <div class="col-md-9">
     <div class="gallery-image">
       <% @gallery.each do |picture_gallery_image| %>
-        <div class="img-box">
-          <img src="<%= url_for(picture_gallery_image.image) %>" alt="" />
-          <div class="transparent-box">
-            <div class="caption">
-              <p>Подивитись схожі картинки</p>
-            </div>
-          </div> 
-        </div>
+        <%= link_to similar_images_gallery_path(id: @picture_gallery.id, picture_id: picture_gallery_image.id) do %>
+          <div class="img-box">
+            <img src="<%= url_for(picture_gallery_image.image) %>" alt="" />
+            <div class="transparent-box">
+              <div class="caption">
+                <p>Подивитись схожі картинки</p>
+              </div>
+            </div> 
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div class="d-flex justify-content-center">

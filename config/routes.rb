@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   resources :gallery, only: [:create, :show] do
     post :add_image, on: :member
+    post :add_similar_images, on: :member
+    get :similar_images, on: :member
   end
 end

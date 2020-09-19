@@ -1,5 +1,5 @@
 class GalleryController < ApplicationController
-  before_action :set_picture_gallery, only: [:show, :add_image]
+  before_action :set_picture_gallery, only: [:show, :add_image, :similar_images]
   
   def index
     @picture_gallery = PictureGallery.new()
@@ -20,6 +20,10 @@ class GalleryController < ApplicationController
     end
   end
 
+  def similar_images
+    @pictures = PictureGalleryImage.find(params[:picture_id])
+  end
+
   def add_image
     picture = PictureGalleryImage.new(picture_gallery_id: @picture_gallery.id)
     picture.image.attach(gallery_params[:image])
@@ -32,12 +36,14 @@ class GalleryController < ApplicationController
     end
   end
 
+  def add_similar_images; end
+
   private
 
   def gallery_params
-    params.fetch(:picture_gallery, {}).permit(:id,
-                                              :category,
-                                              :image)
+    params.fetch(:picture_gallery, {}).permit(:category,
+                                              :image,
+                                              :similar_images)
   end
 
   def set_picture_gallery

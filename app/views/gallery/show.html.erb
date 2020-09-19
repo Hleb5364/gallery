@@ -1,1 +1,39 @@
-<p>New Galery</p>
+<h4 class="card-title mt-3 text-center">
+  <%= @picture_gallery.category %>
+</h4>
+<div class="row">
+  <div class="col-md-3">
+    <%= form_with model: @picture_gallery, url: add_image_gallery_path(id: @picture_gallery.id), method: :post, local: true do |form| %>
+      <div class="custom-file ml-2 mb-2 mt-2">
+        <%= form.file_field :image, class: "custom-file-input", data: {'image-file': true}%>
+        <%= form.label :image, "Додати картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
+      </div>
+      <div class="ml-2 mb-2">
+        <% flash.each do |key, message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+      <div class="form-group ml-2">
+        <button type="submit" class="btn btn-primary btn-block">Додати</button>
+      </div>                                                                      
+    <%end%>
+  </div>
+  
+  <div class="col-md-9">
+    <div class="gallery-image">
+      <% @gallery.each do |picture_gallery_image| %>
+        <div class="img-box">
+          <img src="<%= url_for(picture_gallery_image.image) %>" alt="" />
+          <div class="transparent-box">
+            <div class="caption">
+              <p>Подивитись схожі картинки</p>
+            </div>
+          </div> 
+        </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @gallery %>
+    </div>
+  </div>
+</div>

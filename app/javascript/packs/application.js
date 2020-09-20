@@ -10,9 +10,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 
-$(function() {
-  $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html")
-
+$(function(){
   $("[data-select-gallery]").change(function() {
     if (this.selectedIndex!==0) {
       window.location.href = this.value
@@ -29,7 +27,6 @@ function updateUploadedImage(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
       var fileName = $('[data-image-file]')[0].files[0].name
-
       if (fileName.length > 20) {
         fileName = fileName.substring(0, 20) + "...";
       }

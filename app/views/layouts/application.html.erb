@@ -6,11 +6,12 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <%= yield :javascript_includes %>
   </head>
 
   <header>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand">Галерея</a>
+      <%=link_to "Gallery", root_path, class: "navbar-brand"%>
       <form class="form-inline">
         <select class="custom-select" data-select-gallery>
           <option selected>Иснуючі категорії</option>

@@ -11,11 +11,10 @@ class GalleryController < ApplicationController
 
   def create
     @picture_gallery = PictureGallery.new(gallery_params)
-
     if @picture_gallery.save
-      redirect_to gallery_path(id: @picture_gallery.id)
+      redirect_to gallery_path(@picture_gallery.id)
     else
-      flash[:alert] = @picture_gallery.errors.messages.values.flatten
+      flash[:notice] = "Щось пішло не так("
       redirect_to root_path
     end
   end
@@ -26,15 +25,11 @@ class GalleryController < ApplicationController
   end
 
   def add_image
-    picture = PictureGalleryImage.new(picture_gallery_id: @picture_gallery.id)
-    picture.image.attach(gallery_params[:image])
-
-    if picture.save
-      redirect_to gallery_path(params[:id])
-    else
-      flash[:alert] = "Щось пішло не так("
-      redirect_to gallery_path(params[:id])
-    end
+    @picture_gallery.attach_images(gallery_params[:images])
+    redirect_to gallery_path(params[:id])
+    rescue
+    flash[:alert] = "Щось пішло не так("
+    redirect_to gallery_path(params[:id])
   end
 
   def add_similar_images
@@ -53,8 +48,8 @@ class GalleryController < ApplicationController
 
   def gallery_params
     params.fetch(:picture_gallery, {}).permit(:category,
-                                              :image,
-                                              :similar_image)
+                                              :similar_image,
+                                              images: [])
   end
 
   def set_picture_gallery

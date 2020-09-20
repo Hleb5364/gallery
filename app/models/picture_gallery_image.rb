@@ -3,4 +3,6 @@ class PictureGalleryImage < ApplicationRecord
 
   has_one_attached :image
   has_many_attached :similar_images
+
+  validates :image, presence: true
 end

@@ -5,8 +5,8 @@
   <div class="col-md-3">
     <%= form_with model: @picture_gallery, url: add_image_gallery_path(id: @picture_gallery.id), method: :post, local: true do |form| %>
       <div class="custom-file ml-2 mb-2 mt-2">
-        <%= form.file_field :images, class: "custom-file-input", multiple: true,data: {'image-file': true}%>
-        <%= form.label :image, "Додати картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
+        <%= form.file_field :images, class: "custom-file-input", multiple: true, data: {'image-file': true}%>
+        <%= form.label :images, "Додати картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
       </div>
       <div class="ml-2 mb-2">
         <% flash.each do |key, message| %>

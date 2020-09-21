@@ -35,11 +35,10 @@ class GalleryController < ApplicationController
   def add_similar_images
     picture = PictureGalleryImage.find_by(picture_gallery_id: params[:id])
 
-    if gallery_params[:similar_images].present?
-      picture.similar_images.attach(gallery_params[:similar_images])
+    if picture.attach_similar_images(gallery_params[:similar_images])
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     else
-      flash[:alert] = "Щось пішло не так("
+      flash[:alert] = picture.errors.messages.values.flatten
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     end
   end

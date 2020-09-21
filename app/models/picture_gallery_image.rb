@@ -34,11 +34,11 @@ class PictureGalleryImage < ApplicationRecord
   end
 
   def compareWidth(similarImgWidth, originalImgWidth)
-    (originalImgWidth + originalImgWidth * 0.1) >= similarImgWidth && (originalImgWidth - originalImgWidth * 0.1) <= similarImgWidth
+    (originalImgWidth * 1.1) >= similarImgWidth && (originalImgWidth * 0.9) <= similarImgWidth
   end
 
   def compareHeight(similarImgHeight, originalImgHeight)
-    (originalImgHeight + originalImgHeight * 0.1) >= similarImgHeight && (originalImgHeight - originalImgHeight * 0.1) <= similarImgHeight
+    (originalImgHeight * 1.1) >= similarImgHeight && (originalImgHeight * 0.9) <= similarImgHeight
   end
 
   def check_format(images)

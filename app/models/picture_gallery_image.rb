@@ -10,14 +10,14 @@ class PictureGalleryImage < ApplicationRecord
     begin
       check_format(images)
       check_size(images)
-    rescue
-      errors.add(:similar_images, "Ви не прикріпили зображення")
+    rescue StandardError
+      errors.add(:similar_images, 'Ви не прикріпили зображення')
     end
 
-    unless errors.messages.present?
-      similar_images.attach(images)
-    else
+    if errors.messages.present?
       false
+    else
+      similar_images.attach(images)
     end
   end
 

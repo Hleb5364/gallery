@@ -1,8 +1,8 @@
 class GalleryController < ApplicationController
   before_action :set_picture_gallery, only: [:show, :add_image, :similar_images]
-  
+
   def index
-    @picture_gallery = PictureGallery.new()
+    @picture_gallery = PictureGallery.new
   end
 
   def show
@@ -14,7 +14,7 @@ class GalleryController < ApplicationController
     if @picture_gallery.save
       redirect_to gallery_path(@picture_gallery.id)
     else
-      flash[:notice] = "Щось пішло не так("
+      flash[:notice] = 'Щось пішло не так('
       redirect_to root_path
     end
   end
@@ -27,8 +27,8 @@ class GalleryController < ApplicationController
   def add_image
     @picture_gallery.attach_images(gallery_params[:images])
     redirect_to gallery_path(params[:id])
-    rescue
-    flash[:alert] = "Щось пішло не так("
+  rescue StandardError
+    flash[:alert] = 'Щось пішло не так('
     redirect_to gallery_path(params[:id])
   end
 
@@ -38,7 +38,7 @@ class GalleryController < ApplicationController
     if picture.attach_similar_images(gallery_params[:similar_images])
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     else
-      flash[:alert] = picture.errors.messages.values.flatten
+      flash[:alert] = picture.errors.messages.values.flatten.uniq
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     end
   end
@@ -54,4 +54,4 @@ class GalleryController < ApplicationController
   def set_picture_gallery
     @picture_gallery = PictureGallery.find(params[:id])
   end
-end 
+end

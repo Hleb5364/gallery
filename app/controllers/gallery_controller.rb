@@ -38,7 +38,7 @@ class GalleryController < ApplicationController
     if picture.attach_similar_images(gallery_params[:similar_images])
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     else
-      flash[:alert] = picture.errors.messages.values.flatten
+      flash[:alert] = picture.errors.messages.values.flatten.uniq
       redirect_to similar_images_gallery_path(id: params[:id], picture_id: picture.id)
     end
   end

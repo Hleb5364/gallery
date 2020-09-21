@@ -1,7 +1,3 @@
-<% content_for :javascript_includes do %>
-  <%= javascript_pack_tag "picture_checker" %>
-<% end %>
-
 <h4 class="card-title mt-3 text-center">
   Схожі картинки
 </h4>
@@ -14,7 +10,7 @@
         <%= form.label :similar_images, "Додати схожу картинку до галереї", class: "custom-file-label", data: {'image-label': true} %>
       </div>
       <div class="ml-2 mb-2">
-        <% flash.each do |key, message| %>
+        <% flash[:alert]&.each do |message| %>
           <p><%= message %></p>
         <% end %>
       </div>

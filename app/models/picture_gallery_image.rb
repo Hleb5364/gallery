@@ -8,8 +8,7 @@ class PictureGalleryImage < ApplicationRecord
 
   def attach_similar_images(images)
     begin
-      check_format(images)
-      check_size(images)
+      compare_images(images)
     rescue StandardError
       errors.add(:similar_images, 'Ви не прикріпили зображення')
     end
@@ -23,13 +22,18 @@ class PictureGalleryImage < ApplicationRecord
 
   private
 
-  def check_size(images)
+  def compare_images(images)
     original_image = MiniMagick::Image.open(image)
     images.each do |img|
       similar_image = MiniMagick::Image.open(img.tempfile.to_path)
-      unless compareWidth(similar_image.width, original_image.width) && compareHeight(similar_image.height, original_image.height)
-        errors.add(:similar_images, "Формат зображень має бути #{original_image[:width]}x#{original_image[:height]}")
-      end
+      check_format(similar_image, original_image)
+      check_size(similar_image, original_image)
+    end
+  end
+
+  def check_size(similar_image, original_image)
+    unless compareWidth(similar_image.width, original_image.width) && compareHeight(similar_image.height, original_image.height)
+      errors.add(:similar_images, "Формат зображень має бути #{original_image[:width]}x#{original_image[:height]}")
     end
   end
 
@@ -41,12 +45,9 @@ class PictureGalleryImage < ApplicationRecord
     (originalImgHeight * 1.1) >= similarImgHeight && (originalImgHeight * 0.9) <= similarImgHeight
   end
 
-  def check_format(images)
-    images.each do |img|
-      image_file = MiniMagick::Image.open(img.tempfile.to_path)
-      unless image_file.path.split(".").last == image.filename.extension
-        errors.add(:similar_images, "Формат зображень має бути #{image.filename.extension}")
-      end
+  def check_format(similar_image, original_image)
+    unless similar_image.type== original_image.type
+      errors.add(:similar_images, "Формат зображень має бути #{image.filename.extension}")
     end
   end
 end
